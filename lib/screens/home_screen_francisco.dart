@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_crud_francisco/widgets/widgets.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -8,17 +9,15 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Damflix'),
-        actions: [
+        actions: const [
           Icon(Icons.search_outlined)
         ],
       ),
-      body: Container(
-        child: Center(
-          child: Text(
-            'Home Screen',
-          ),
-        ),
-      ),
+      body: const Column(
+        children: [
+          CardSwiper()
+        ],
+      )
     );
   }
 }

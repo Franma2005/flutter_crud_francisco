@@ -1,0 +1,1 @@
+export 'package:flutter_crud_francisco/widgets/card_swiper_francisco.dart';
