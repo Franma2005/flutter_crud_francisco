@@ -10,7 +10,10 @@ class AppTheme {
     appBarTheme: const AppBarTheme(
       elevation: 0,
       color: primary,
-      foregroundColor: appBarText
+      foregroundColor: appBarText,
+      titleTextStyle: TextStyle(
+        color: appBarText
+      )
     )
   );
 }

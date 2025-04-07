@@ -7,8 +7,7 @@ class MovieSlider extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 350,
-      color: Colors.red,
+      height: 270,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -37,22 +36,30 @@ class _MoviePoster extends StatelessWidget {
     return Container(
       width: 130,
       height: 190,
-      color: Colors.green,
       margin: const EdgeInsets.symmetric(horizontal: 10),
-      child: const Column(
+      child: Column(
         children: [
-          FadeInImage(
-            width: 130,
-            height: 190,
-            fit: BoxFit.cover,
-            placeholder: AssetImage(
-              'assets-francisco/no-image.jpg'
+          GestureDetector(
+            onTap: () => Navigator.pushNamed(context, 'details', arguments: 'movie-instance'),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: const FadeInImage(
+                width: 130,
+                height: 190,
+                fit: BoxFit.cover,
+                placeholder: AssetImage(
+                  'assets-francisco/no-image.jpg'
+                ),
+                image: NetworkImage(
+                  'https://r-charts.com/es/miscelanea/procesamiento-imagenes-magick_files/figure-html/recortar-bordes-imagen-r.png'
+                )
+              ),
             ),
-            image: NetworkImage(
-              'https://r-charts.com/es/miscelanea/procesamiento-imagenes-magick_files/figure-html/recortar-bordes-imagen-r.png'
-            )
           ),
-          Text(
+          const SizedBox(
+            height: 5
+          ),
+          const Text(
             'El señor de los anillos el retorno del rey',
             overflow: TextOverflow.ellipsis,
             maxLines: 2,
