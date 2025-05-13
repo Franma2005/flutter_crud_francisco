@@ -10,7 +10,6 @@ class CastCarrousel extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 30),
       width: double.infinity,
       height: 180,
-      color: Colors.red,
       child: ListView.builder(
         itemCount: 10,
         scrollDirection: Axis.horizontal,
@@ -30,7 +29,6 @@ class _CastCard extends StatelessWidget {
       width: 110,
       height: 100,
       margin: const EdgeInsets.symmetric(horizontal: 10),
-      color: Colors.green,
       child: Column(
         children: [
           ClipRRect(
@@ -46,6 +44,15 @@ class _CastCard extends StatelessWidget {
               height: 140,
               fit: BoxFit.cover,
             ),
+          ),
+          const SizedBox(
+            height: 5,
+          ),
+          const Text(
+            'actor.name',
+            textAlign: TextAlign.center,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 2,
           )
         ],
       ),
