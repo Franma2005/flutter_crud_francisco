@@ -10,11 +10,13 @@ class MovieProvider extends ChangeNotifier {
   final String _language = 'es-ES';
 
   List<Result> ondDisplayMovies = [];
+  List<Result> favoritesMovies = [];
 
   MovieProvider() {
     print('MoviesProvider inicializado');
 
-    this.getOnDisplayMovies();
+    getOnDisplayMovies();
+    getFavoritesMovies();
   }
 
   getOnDisplayMovies() async {
@@ -31,4 +33,17 @@ class MovieProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  getFavoritesMovies() async {
+    var url = Uri.https(_baseUrl, '3/movie/popular', {
+      'api_key': _apiKey,
+      'language': _language,
+      'page': '1'
+    });
+    var response = await http.get(url);
+
+    final FavoritesResponse favoritesResponse = FavoritesResponse.fromJson(response.body);
+
+    favoritesMovies = [...favoritesMovies, ...favoritesResponse.results];
+    notifyListeners();
+  }
 }
