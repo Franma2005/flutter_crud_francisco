@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_crud_francisco/providers/movie_provider_francisco.dart';
 import 'package:flutter_crud_francisco/widgets/widgets.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final moviesProvider = Provider.of<MovieProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Damflix'),
@@ -13,11 +16,11 @@ class HomeScreen extends StatelessWidget {
           Icon(Icons.search_outlined)
         ],
       ),
-      body: const SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Column(
           children: [
-            CardSwiper(),
-            MovieSlider()
+            CardSwiper(movies: moviesProvider.ondDisplayMovies),
+            const MovieSlider()
           ],
         ),
       )

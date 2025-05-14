@@ -93,6 +93,13 @@ class Result {
         required this.voteCount,
     });
 
+    get fullPosterImage {
+      String completePosterPath;
+      if(posterPath == null) completePosterPath = 'https://i.stack.imgur.com/GNhxO.png';
+      completePosterPath = 'https://image.tmdb.org/t/p/w500/$posterPath';
+      return completePosterPath;
+    }
+
     factory Result.fromJson(String str) => Result.fromMap(json.decode(str));
 
     String toJson() => json.encode(toMap());
