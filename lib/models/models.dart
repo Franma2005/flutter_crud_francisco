@@ -1,0 +1,1 @@
+export 'package:flutter_crud_francisco/models/now_playing.dart';
