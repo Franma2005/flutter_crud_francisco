@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_crud_francisco/models/now_playing.dart';
 
 class MovieSlider extends StatelessWidget {
-  const MovieSlider({super.key});
+  final List<Result> movies;
+  
+  const MovieSlider({super.key, required this.movies});
 
   @override
   Widget build(BuildContext context) {
@@ -19,9 +22,9 @@ class MovieSlider extends StatelessWidget {
           Expanded(
               child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  itemCount: 20,
+                  itemCount: movies.length,
                   itemBuilder: (BuildContext context, int index) =>
-                      _MoviePoster()))
+                      _MoviePoster(movie: movies[index])))
         ],
       ),
     );
@@ -29,7 +32,9 @@ class MovieSlider extends StatelessWidget {
 }
 
 class _MoviePoster extends StatelessWidget {
-  const _MoviePoster({super.key});
+  final Result movie;
+  
+  const _MoviePoster({super.key, required this.movie});
 
   @override
   Widget build(BuildContext context) {
@@ -43,15 +48,15 @@ class _MoviePoster extends StatelessWidget {
             onTap: () => Navigator.pushNamed(context, 'details', arguments: 'movie-instance'),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20),
-              child: const FadeInImage(
+              child: FadeInImage(
                 width: 130,
                 height: 190,
                 fit: BoxFit.cover,
-                placeholder: AssetImage(
+                placeholder: const AssetImage(
                   'assets-francisco/no-image.jpg'
                 ),
                 image: NetworkImage(
-                  'https://r-charts.com/es/miscelanea/procesamiento-imagenes-magick_files/figure-html/recortar-bordes-imagen-r.png'
+                  movie.fullPosterImage
                 )
               ),
             ),
@@ -59,8 +64,8 @@ class _MoviePoster extends StatelessWidget {
           const SizedBox(
             height: 5
           ),
-          const Text(
-            'El señor de los anillos el retorno del rey',
+          Text(
+            movie.title,
             overflow: TextOverflow.ellipsis,
             maxLines: 2,
             textAlign: TextAlign.center,

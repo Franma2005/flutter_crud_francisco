@@ -21,6 +21,8 @@ class CastCarrousel extends StatelessWidget {
 }
 
 class _CastCard extends StatelessWidget {
+  
+  
   const _CastCard({super.key});
 
   @override
