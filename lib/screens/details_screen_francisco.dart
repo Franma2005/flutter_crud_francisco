@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_crud_francisco/models/now_playing.dart';
 import 'package:flutter_crud_francisco/widgets/cast_carrousel_francisco.dart';
 
 class DetailsScreen extends StatelessWidget {
+  
   const DetailsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final Result movie = ModalRoute.of(context)!.settings.arguments as Result;
+    print('title: ${movie.title}');
     return Scaffold(
       body: CustomScrollView(
         slivers: [

@@ -8,6 +8,7 @@ class MovieSlider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('Favorites: ${movies.length}');
     return Container(
       width: double.infinity,
       height: 270,
@@ -23,8 +24,12 @@ class MovieSlider extends StatelessWidget {
               child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: movies.length,
-                  itemBuilder: (BuildContext context, int index) =>
-                      _MoviePoster(movie: movies[index])))
+                  itemBuilder: (BuildContext context, int index) {
+                      print('movies ${movies[index]}');
+                    return _MoviePoster(movie: movies[index]);
+                  }
+                      
+                  ))
         ],
       ),
     );

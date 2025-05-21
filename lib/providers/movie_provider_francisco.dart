@@ -4,12 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class MovieProvider extends ChangeNotifier {
-
   final String _apiKey = '382ffdb92c5388068a614d6840b46ca8';
   final String _baseUrl = 'api.themoviedb.org';
-  final String _language = 'es-ES';
+  final String _language = 'es-Es';
 
-  List<Result> ondDisplayMovies = [];
+  List<Result> onDisplayMovies = [];
   List<Result> favoritesMovies = [];
 
   MovieProvider() {
@@ -20,30 +19,30 @@ class MovieProvider extends ChangeNotifier {
   }
 
   getOnDisplayMovies() async {
-    var url = Uri.https(_baseUrl, '3/movie/now_playing', {
-      'api_key': _apiKey,
-      'language': _language,
-      'page': '1'
-    });
+    var url = Uri.https(_baseUrl, '3/movie/now_playing',
+        {'api_key': _apiKey, 'language': _language, 'page': '1'});
     var response = await http.get(url);
-
-    final NowPlayingResponse nowPlayingResponse = NowPlayingResponse.fromJson(response.body);
-
-    ondDisplayMovies = nowPlayingResponse.results;
+    print('hola');
+    final NowPlayingResponse nowPlayingResponse =
+        NowPlayingResponse.fromJson(response.body);
+    onDisplayMovies = nowPlayingResponse.results;
     notifyListeners();
   }
 
   getFavoritesMovies() async {
-    var url = Uri.https(_baseUrl, '3/movie/popular', {
-      'api_key': _apiKey,
-      'language': _language,
-      'page': '1'
-    });
-    var response = await http.get(url);
+    try {
+      var url = Uri.https(_baseUrl, '3/movie/popular',
+          {'api_key': _apiKey, 'language': _language, 'page': '1'});
+      var response = await http.get(url);
+      print('Respuest${response.body}');
+      final FavoritesResponse favoritesResponse =
+          FavoritesResponse.fromJson(response.body);
 
-    final FavoritesResponse favoritesResponse = FavoritesResponse.fromJson(response.body);
-
-    favoritesMovies = [...favoritesMovies, ...favoritesResponse.results];
-    notifyListeners();
+      print('Paco $favoritesResponse');
+      favoritesMovies = [...favoritesMovies, ...favoritesResponse.results];
+      notifyListeners();
+    } catch (e) {
+      print('Error en getFavoritesMovies: $e');
+    }
   }
 }
